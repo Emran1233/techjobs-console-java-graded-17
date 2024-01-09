@@ -91,11 +91,27 @@ public class JobData {
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
-        // load data, if not already loaded
+
         loadData();
 
-        // TODO - implement this method
-        return null;
+
+        String searchValueLowercase = value.toLowerCase();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+            for (String aValue : row.values()) {
+                String aValueLowercase = aValue.toLowerCase();
+                if (aValueLowercase.contains(searchValueLowercase)) {
+                    jobs.add(row);
+
+                }
+            }
+        }
+        if (jobs.size() == 0) {
+            System.out.println("No Results");
+        }
+        return jobs;
     }
 
     /**
